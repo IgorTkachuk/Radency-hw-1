@@ -1,5 +1,5 @@
 #root {
-  width: 90%;
+  width: 70%;
   margin: 0 auto;
   margin-top: 20px;
 }
@@ -58,4 +58,12 @@
 
 #show-button {
   margin-top: 20px;
+}
+
+.note-nav {
+  display: flex;
+}
+
+.note-nav-el {
+  margin-left: 10px;
 }
