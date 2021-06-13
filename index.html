@@ -15,23 +15,33 @@
     <div id="root"></div>
     <input type="button" value="Create Note" id="show-button" />
     <input type="button" value="Show archived" id="show-archived-button" />
+    <div id="category-summary"></div>
+
     <div id="prompt-form-container">
       <form id="prompt-form">
         <div id="prompt-message"></div>
 
         <label for="name">Name:</label>
-        <input name="name" type="text" id="name" />
+        <input name="name" type="text" id="name" class="prompt-form-el" />
 
-        <label for="name">Category:</label>
-        <input name="category" type="text" id="category" />
+        <div id="category-place" class="prompt-form-el"></div>
+
+        <!-- <label for="category">Category:</label>
+        <input name="category" type="text" id="category" /> -->
 
         <label for="content">Content:</label>
-        <input name="content" type="text" id="content" />
+        <input name="content" type="text" id="content" class="prompt-form-el" />
 
-        <input type="submit" value="Ok" />
-        <input type="button" name="cancel" value="Отмена" />
+        <input type="submit" value="Ok" class="prompt-form-el" />
+        <input
+          type="button"
+          name="cancel"
+          value="Отмена"
+          class="prompt-form-el"
+        />
       </form>
     </div>
+
     <script type="module" src="./index.js"></script>
   </body>
 </html>

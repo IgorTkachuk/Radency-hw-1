@@ -1,7 +1,11 @@
 import { makeNote } from "./dom.js";
 import { showPrompt } from "./modal.js";
+import Category from "./category.js";
+
+const category = ["Task", "Random Thought", "Idea"];
 
 let showArchived = false;
+const dataCaption = ["Name", "Created", "Category", "Content", "Dates"];
 const data = [
   {
     name: "Shopping list",
@@ -32,13 +36,32 @@ const data = [
   },
 ];
 
+const categories = new Category(category);
+const elCategories = categories.getHTMLElement();
+document.getElementById("category-place").appendChild(elCategories);
+
 const list = [];
 
+function makeNoteListCaption() {
+  const caption = document.createElement("div");
+  caption.classList.add("note-caption");
+
+  dataCaption.forEach((el) => {
+    const col = document.createElement("div");
+    col.classList.add("col-caption");
+    col.innerText = el;
+    caption.appendChild(col);
+  });
+
+  return caption;
+}
+
 function showList() {
-  console.log(data);
   const root = document.getElementById("root");
   list.length = 0;
   root.innerHTML = "";
+
+  root.appendChild(makeNoteListCaption());
 
   data
     .filter((note) => !note._archived || showArchived)
@@ -49,6 +72,14 @@ function showList() {
   list.forEach((note) => {
     root.appendChild(note);
   });
+
+  showCategorySummary();
+}
+
+function showCategorySummary() {
+  const elCategorySummary = document.getElementById("category-summary");
+  elCategorySummary.innerText = "";
+  elCategorySummary.appendChild(categories.getCategoryTable(data));
 }
 
 function removeNote(id) {
@@ -75,8 +106,10 @@ showList();
 
 document.getElementById("show-button").onclick = function () {
   showPrompt("Create Note", null, function (value) {
-    data.push(value);
-    showList();
+    if (value) {
+      data.push(value);
+      showList();
+    }
   });
 };
 
